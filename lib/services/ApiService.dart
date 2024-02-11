@@ -6,7 +6,7 @@ import 'package:http/http.dart';
 import 'package:weather_app/services/ApiKeyService.dart';
 
 class ApiService {
-  String baseUrl = "api.openweathermap.org/data/2.5/forecast";
+  String baseUrl = "http://api.openweathermap.org/data/2.5/forecast";
   String lat = "lat=";
   String long = "lon=";
   String appid = "aappid=";
