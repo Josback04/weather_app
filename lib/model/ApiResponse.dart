@@ -1,5 +1,7 @@
+import 'package:weather_app/services/data_converter.dart';
+
 class APIResponse {
-  String cod;
+  int cod;
   String message;
   int cnt;
   List<Forecast> list;
@@ -9,6 +11,15 @@ class APIResponse {
       required this.message,
       required this.cnt,
       required this.list});
+
+  APIResponse.fromJson(Map<String, dynamic> map)
+      : cod = map["cod"],
+        message = map["message"],
+        cnt = map["cnt"],
+        list = DataConverter()
+            .listMappable(map["list"])
+            .map((e) => Forecast.fromJson(e))
+            .toList();
 }
 
 class Forecast {
@@ -28,6 +39,18 @@ class Forecast {
       required this.wind,
       required this.visibility,
       required this.dt_txt});
+
+  Forecast.fromJson(Map<String, dynamic> map)
+      : dt = map["dt"],
+        main = Main.fromJson(map["main"]),
+        weather = DataConverter()
+            .listMappable(map["weather"])
+            .map((e) => Weather.fromJson(e))
+            .toList(),
+        clouds = Clouds.fromJson(map["clouds"]),
+        wind = Wind.fromJson(map["wind"]),
+        visibility = map["visibility"],
+        dt_txt = map["dt_txt"];
 }
 
 class Main {
@@ -49,6 +72,16 @@ class Main {
       required this.grnd_level,
       required this.humidity,
       required this.temp_kf});
+
+  Main.fromJson(Map<String, dynamic> map)
+      : temp = map["temp"],
+        temp_min = map["temp_min"],
+        temp_max = map["temp_max"],
+        pressure = map["pressure"],
+        sea_level = map["sea_level"],
+        grnd_level = map["grnd_level"],
+        humidity = map["humidity"],
+        temp_kf = map["temp_kf"];
 }
 
 class Weather {
@@ -62,11 +95,17 @@ class Weather {
       required this.main,
       required this.description,
       required this.icon});
+  Weather.fromJson(Map<String, dynamic> map)
+      : id = map["id"],
+        main = map["main"],
+        description = map["description"],
+        icon = map["icon"];
 }
 
 class Clouds {
   int all;
   Clouds({required this.all});
+  Clouds.fromJson(Map<String, dynamic> map) : all = map["all"];
 }
 
 class Wind {
@@ -74,4 +113,9 @@ class Wind {
   int deg;
   double gust;
   Wind({required this.speed, required this.deg, required this.gust});
+
+  Wind.fromJson(Map<String, dynamic> map)
+      : speed = map["speed"],
+        deg = map["deg"],
+        gust = map["gust"];
 }
