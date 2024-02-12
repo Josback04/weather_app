@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
+import 'package:weather_app/model/ApiResponse.dart';
 import 'package:weather_app/model/GeoPosition.dart';
 import 'package:weather_app/services/ApiService.dart';
 import 'package:weather_app/services/LocationService.dart';
@@ -13,6 +14,7 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   GeoPosition? userPosition;
+  APIResponse? apiResponse;
   @override
   void initState() {
     getUserLocation();
@@ -28,8 +30,7 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
       body: Center(
-        child: Text(
-            "Ma position est: ${userPosition?.lat} \n ${userPosition?.long}"),
+        child: Text("notre reponse: ${apiResponse?.message ?? 0} "),
       ),
     );
   }
@@ -39,8 +40,9 @@ class _HomeViewState extends State<HomeView> {
     if (loc != null) {
       setState(() {
         userPosition = loc;
-        ApiService().callApi(userPosition!);
       });
+      apiResponse = await ApiService().callApi(userPosition!);
+      setState(() {});
     }
   }
 }
