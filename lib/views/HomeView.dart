@@ -3,7 +3,10 @@ import 'package:weather_app/model/ApiResponse.dart';
 import 'package:weather_app/model/GeoPosition.dart';
 import 'package:weather_app/services/ApiService.dart';
 import 'package:weather_app/services/LocationService.dart';
+import 'package:weather_app/views/AddCity.dart';
 import 'package:weather_app/views/ForecastView.dart';
+import 'package:weather_app/views/MyDrawer.dart';
+import 'package:weather_app/views/NoData.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -30,14 +33,18 @@ class _HomeViewState extends State<HomeView> {
           userPosition?.city ?? "Ma Méteo",
         ),
       ),
-      body: Center(
-        child: Column(
-          children: [
-            // Text("notre reponse: ${apiResponse?.cnt ?? 0} "),
-            // Text("notre forecast: ${forecast?.visibility}")
-            ForecastView(response: apiResponse),
-          ],
-        ),
+      drawer: MyDrawerView(myPosition: userPosition, cities: [], onTap: onTap),
+      body: Column(
+        children: [
+          AddCityView(onAddCity: onAddCity),
+          const SizedBox(
+            height: 15,
+          ),
+          Expanded(
+              child: (apiResponse == null)
+                  ? NoData()
+                  : ForecastView(response: apiResponse!))
+        ],
       ),
     );
   }
@@ -52,4 +59,10 @@ class _HomeViewState extends State<HomeView> {
       setState(() {});
     }
   }
+
+  onTap(String string) {
+    Navigator.of(context).pop();
+  }
+
+  onAddCity(String string) {}
 }
