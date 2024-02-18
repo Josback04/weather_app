@@ -1,5 +1,8 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:weather_app/model/ApiResponse.dart';
+import 'package:weather_app/services/Data_converter.dart';
 
 class CurrentWeather extends StatelessWidget {
   Forecast forecast;
@@ -23,13 +26,23 @@ class CurrentWeather extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   //image,
-                  Text("${forecast.main.temp.toInt()} dégré Celsius"),
+                  Image.network(
+                      DataConverter().fromIcon(forecast.weather.first.icon)),
+                  Text(
+                    "${forecast.main.temp.toInt()}° C",
+                    style: Theme.of(context).textTheme.headlineLarge,
+                  ),
                 ],
               ),
               const Spacer(),
-              Text("${forecast.weather.first.description}"),
               Text(
-                  "Min : ${forecast.main.temp_min.toInt()} dégré Celsius --  Max: ${forecast.main.temp_max.toInt()}"),
+                "${forecast.weather.first.description}",
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
+              Text(
+                "Min : ${forecast.main.temp_min.toInt()} dégrés Celsius --  Max: ${forecast.main.temp_max.toInt()}",
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
             ],
           ),
         ),
