@@ -17,7 +17,7 @@ class ApiService {
   String prepareQuery(GeoPosition geoPosition) {
     final geoLat = geoPosition.lat;
     final geoLong = geoPosition.long;
-    return "$baseUrl?$lat$geoLat&$long$geoLong&$units$lang&$appid$apiKey";
+    return "$baseUrl?$lat$geoLat&$long$geoLong&$units&$lang&$appid$apiKey";
   }
 
   Future<APIResponse> callApi(GeoPosition position) async {
