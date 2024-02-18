@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:weather_app/views/HomeView.dart';
 
 void main() {
@@ -10,7 +11,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(Typography.blackCupertino),
+      ),
       home: HomeView(),
     );
   }
