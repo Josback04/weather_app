@@ -3,7 +3,7 @@ import 'package:weather_app/model/ApiResponse.dart';
 import 'package:weather_app/model/GeoPosition.dart';
 import 'package:weather_app/services/ApiService.dart';
 import 'package:weather_app/services/LocationService.dart';
-import 'package:weather_app/views/AddCity.dart';
+import 'package:weather_app/views/widgets/AddCity.dart';
 import 'package:weather_app/views/ForecastView.dart';
 import 'package:weather_app/views/MyDrawer.dart';
 import 'package:weather_app/views/NoData.dart';
