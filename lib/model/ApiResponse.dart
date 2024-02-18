@@ -1,8 +1,8 @@
-import 'package:weather_app/services/data_converter.dart';
+import 'package:weather_app/services/Data_converter.dart';
 
 class APIResponse {
-  int cod;
-  String message;
+  String cod;
+  int message;
   int cnt;
   List<Forecast> list;
 
@@ -57,10 +57,10 @@ class Main {
   double temp;
   double temp_min;
   double temp_max;
-  int pressure;
-  int sea_level;
-  int grnd_level;
-  int humidity;
+  double pressure;
+  double sea_level;
+  double grnd_level;
+  double humidity;
   double temp_kf;
 
   Main(
@@ -74,14 +74,14 @@ class Main {
       required this.temp_kf});
 
   Main.fromJson(Map<String, dynamic> map)
-      : temp = map["temp"],
-        temp_min = map["temp_min"],
-        temp_max = map["temp_max"],
-        pressure = map["pressure"],
-        sea_level = map["sea_level"],
-        grnd_level = map["grnd_level"],
-        humidity = map["humidity"],
-        temp_kf = map["temp_kf"];
+      : temp = map["temp"].toDouble(),
+        temp_min = map["temp_min"].toDouble(),
+        temp_max = map["temp_max"].toDouble(),
+        pressure = map["pressure"].toDouble(),
+        sea_level = map["sea_level"].toDouble(),
+        grnd_level = map["grnd_level"].toDouble(),
+        humidity = map["humidity"].toDouble(),
+        temp_kf = map["temp_kf"].toDouble();
 }
 
 class Weather {
@@ -115,7 +115,7 @@ class Wind {
   Wind({required this.speed, required this.deg, required this.gust});
 
   Wind.fromJson(Map<String, dynamic> map)
-      : speed = map["speed"],
+      : speed = map["speed"].toDouble(),
         deg = map["deg"],
-        gust = map["gust"];
+        gust = map["gust"].toDouble();
 }
