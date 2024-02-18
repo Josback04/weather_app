@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:location/location.dart';
 import 'package:weather_app/model/ApiResponse.dart';
 import 'package:weather_app/model/GeoPosition.dart';
 import 'package:weather_app/services/ApiService.dart';
 import 'package:weather_app/services/LocationService.dart';
+import 'package:weather_app/views/ForecastView.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -15,6 +15,7 @@ class HomeView extends StatefulWidget {
 class _HomeViewState extends State<HomeView> {
   GeoPosition? userPosition;
   APIResponse? apiResponse;
+  Forecast? forecast;
   @override
   void initState() {
     getUserLocation();
@@ -30,7 +31,13 @@ class _HomeViewState extends State<HomeView> {
         ),
       ),
       body: Center(
-        child: Text("notre reponse: ${apiResponse?.message ?? 0} "),
+        child: Column(
+          children: [
+            // Text("notre reponse: ${apiResponse?.cnt ?? 0} "),
+            // Text("notre forecast: ${forecast?.visibility}")
+            ForecastView(response: apiResponse),
+          ],
+        ),
       ),
     );
   }
