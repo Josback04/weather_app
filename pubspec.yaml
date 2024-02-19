@@ -7,8 +7,10 @@ environment:
   sdk: '>=3.2.6 <4.0.0'
 
 dependencies:
+  equatable: ^2.0.5
   flutter:
     sdk: flutter
+  flutter_bloc: ^8.1.4
   geocoding: ^2.1.1
   google_fonts: ^6.1.0
   http: ^1.2.0
